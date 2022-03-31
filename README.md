@@ -40,12 +40,26 @@ $ python main.py
 
 ## Requirements
 ```
-Flask==2.0.3
+fastapi==0.75.0
 huggingface-hub==0.4.0
 tokenizers==0.11.6
 torch==1.11.0
 transformers==4.17.0
+pydantic==1.9.0
+uvicorn==0.17.6
 ```
+
+## HTTP POST(유사도 json 반환) (endpoint : '/sentences')
+
+- `curl` 명령어: 보완 예정
+### Swagger UI
+- url : `127.0.0.1/docs`
+- Try it out -> execute 
+    ![](https://images.velog.io/images/crosstar1228/post/b9e1750e-248a-40cc-b58a-c6c76fcf014a/image.png)
+- 결과 확인
+    ![](https://images.velog.io/images/crosstar1228/post/67fadd21-73fd-434e-980d-574a9887d39c/image.png)
+
+
 ## Score (at [KLUE sts dev set](https://klue-benchmark.com/tasks/67/data/description))
 - Pearson's r (0~5 continuous similarity): 0.933
 - F1 Score(for binary classification): 0.867

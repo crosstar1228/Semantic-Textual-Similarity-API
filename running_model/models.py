@@ -1,5 +1,5 @@
 # 전처리 모듈 import 
-from running_model.data_preprocessing import preprocess
+from running_model.utils import preprocess
 import torch
 from transformers import ElectraForSequenceClassification, ElectraTokenizer
 
