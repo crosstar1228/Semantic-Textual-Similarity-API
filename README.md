@@ -4,14 +4,20 @@
 * fine-tuning에는 [KLUE-STS](https://klue-benchmark.com/tasks/67/overview/description) 의 train data를 사용하였습니다.
 
 ## Updates
-**March 23, 2022**
-* initial commit 
+**March 30, 2022**
+* second commit(changed from flask to fastapi) 
 
 ## How to run
+(Ubuntu 20.04) 기준 
 ```bash
+$ git clone https://github.com/crosstar1228/Semantic-Textual-Similarity-API.git
+$ sudo apt-get install git-lfs
+$ git lfs install
+$ git lfs pull
 $ pip install -r requirements.txt
-$ python main.py
+$ (sudo) python main.py
 ```
+
 실행 후, http://127.0.0.1:5000/ (혹은 localhost)로 접속   
 <img src="images/input_image.png">
 박스안에 문장 두개를 입력하고 submit 해줍니다.
@@ -30,12 +36,14 @@ $ python main.py
 │   ├── index.html
 │   └── result.html
 ├── main.py
+├── basemodel.py
 ├── README.md
 └── requirements.txt
 ``` 
 * running_model : fine-tuning된 best_model과 model을 실행하는데 필요한 모듈을 포함합니다. 
 * models.py : model함수로 모델을 실행하여 두개의 문장에 대해 유사도를 구합니다. 
 * data_preprocessing.py : 받은 두개의 문장에 대해 전처리를 진행하는 모듈입니다. 
+* basemodel.py : `pydantic`을 활용하여 api post/get 명령어로 주고 받을 자료형 및 예시가 class 형태로 정의되어 있습니다.
 
 
 ## Requirements
@@ -50,8 +58,18 @@ uvicorn==0.17.6
 ```
 
 ## HTTP POST(유사도 json 반환) (endpoint : '/sentences')
+### At terminal
+```
+$ curl -X 'POST' \
+  'http://127.0.0.1:8000/sentences' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "sentence1": "그 해 여름은 유난히도 더웠다",
+  "sentence2": "그 해 여름은 유난히 도 습하고 더웠어, 그치?"
+}'
+```
 
-- `curl` 명령어: 보완 예정
 ### Swagger UI
 - url : `127.0.0.1/docs`
 - Try it out -> execute 
